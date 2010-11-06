@@ -49,8 +49,8 @@ goog.events.EventType = {
   DEACTIVATE: 'deactivate', // IE only
   // TODO(user): Test these. I experienced problems with DOMFocusIn, the event
   // just wasn't firing.
-  FOCUSIN: goog.userAgent.IE ? 'focusin' : 'DOMFocusIn',
-  FOCUSOUT: goog.userAgent.IE ? 'focusout' : 'DOMFocusOut',
+  FOCUSIN: goog.userAgent.IE ? 'focusin' : 'focus',
+  FOCUSOUT: goog.userAgent.IE ? 'focusout' : 'blur',
 
   // Forms
   CHANGE: 'change',
