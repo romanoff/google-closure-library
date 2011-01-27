@@ -964,15 +964,20 @@ goog.ui.Dialog.prototype.resizeBackground_ = function() {
   if (this.bgEl_) {
     goog.style.showElement(this.bgEl_, false);
   }
-
+    
   var doc = this.getDomHelper().getDocument();
   var win = goog.dom.getWindow(doc) || window;
 
   // Take the max of scroll height and view height for cases in which document
   // does not fill screen.
   var viewSize = goog.dom.getViewportSize(win);
-  var w = Math.max(doc.body.scrollWidth, viewSize.width);
-  var h = Math.max(doc.body.scrollHeight, viewSize.height);
+  var scrollSize = {height:0, width:0};
+  if (window.innerHeight && window.scrollMaxY) {
+      scrollSize.height = window.innerHeight + window.scrollMaxY;
+	  scrollSize.width = window.innerWidth + window.scrollMaxX;
+  }
+  var w = Math.max(doc.body.scrollWidth, viewSize.width, scrollSize.width);
+  var h = Math.max(doc.body.scrollHeight, viewSize.height, scrollSize.height);
 
   if (this.bgIframeEl_) {
     goog.style.showElement(this.bgIframeEl_, true);
