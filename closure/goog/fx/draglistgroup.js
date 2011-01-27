@@ -374,7 +374,7 @@ goog.fx.DragListGroup.prototype.init = function() {
       this.dragItems_.push(dragItem);
       this.eventHandler_.listen(
           dragItemHandle, goog.events.EventType.MOUSEDOWN,
-          this.handleDragStart_);
+          function(event){if (event.button < 2) this.handleDragStart_(event);});
     }
   }
 
