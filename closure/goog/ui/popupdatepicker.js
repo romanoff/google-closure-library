@@ -222,7 +222,6 @@ goog.ui.PopupDatePicker.prototype.showPopup = function(element) {
   // have to worry about change events when we call setDate().
   this.getHandler().unlisten(this.datePicker_, goog.ui.DatePicker.Events.CHANGE,
                              this.onDateChanged_);
-  this.datePicker_.setDate(null);
 
   // Forward the change event onto our listeners.  Done before we start
   // listening to date changes again, so that listeners can change the date
