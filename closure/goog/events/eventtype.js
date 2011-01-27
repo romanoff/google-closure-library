@@ -55,8 +55,8 @@ goog.events.EventType = {
   // The DOM Events Level 3 Draft deprecates DOMFocusIn in favor of focusin:
   //     http://dev.w3.org/2006/webapi/DOM-Level-3-Events/html/DOM3-Events.html
   // You can use FOCUS in Capture phase until implementations converge.
-  FOCUSIN: goog.userAgent.IE ? 'focusin' : 'DOMFocusIn',
-  FOCUSOUT: goog.userAgent.IE ? 'focusout' : 'DOMFocusOut',
+  FOCUSIN: goog.userAgent.IE ? 'focusin' : 'focus',
+  FOCUSOUT: goog.userAgent.IE ? 'focusout' : 'blur',
 
   // Forms
   CHANGE: 'change',
