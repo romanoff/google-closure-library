@@ -3,7 +3,7 @@
 <!--
 Copyright 2007 The Closure Library Authors. All Rights Reserved.
 
-Use of this source code is governed by an Apache 2.0 License.
+Use of this source code is governed by the Apache License, Version 2.0.
 See the COPYING file for details.
 -->
 <head>
@@ -97,13 +97,9 @@ function testWebSafeEncoding() {
   assertEquals("Websafe decoding broken", test, dec);
 
   // Test parsing malformed characters
-  var caught = false;
-  try {
+  assertThrows("Didn't throw on malformed input", function() {
     goog.crypt.base64.decodeStringToByteArray("foooooo+oooo", true /*websafe*/);
-  } catch(e) {
-    caught = true;
-  }
-  assertTrue("Didn't throw on malformed input", caught);
+  });
 }
 </script>
 </body>

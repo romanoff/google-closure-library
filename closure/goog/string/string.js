@@ -396,6 +396,7 @@ goog.string.numerateCompare = function(str1, str2) {
  */
 goog.string.encodeUriRegExp_ = /^[a-zA-Z0-9\-_.!~*'()]*$/;
 
+
 /**
  * URL-encodes a string
  * @param {*} str The string to url-encode.
@@ -633,6 +634,7 @@ goog.string.unescapePureXmlEntities_ = function(str) {
   });
 };
 
+
 /**
  * String name for the node.normalize function. Anti-virus programs use this as
  * a signature for some viruses so we need a work around (temporary).
@@ -640,6 +642,7 @@ goog.string.unescapePureXmlEntities_ = function(str) {
  * @type {string}
  */
 goog.string.NORMALIZE_FN_ = 'normalize';
+
 
 /**
  * Do escaping of whitespace to preserve spatial formatting. We use character
@@ -1006,8 +1009,9 @@ goog.string.buildString = function(var_args) {
  * @return {string} A random string, e.g. sn1s7vb4gcic.
  */
 goog.string.getRandomString = function() {
-  return Math.floor(Math.random() * 2147483648).toString(36) +
-         (Math.floor(Math.random() * 2147483648) ^ goog.now()).toString(36);
+  var x = 2147483648;
+  return Math.floor(Math.random() * x).toString(36) +
+         Math.abs(Math.floor(Math.random() * x) ^ goog.now()).toString(36);
 };
 
 

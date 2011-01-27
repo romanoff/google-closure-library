@@ -1,5 +1,16 @@
-// Copyright 2010 Google Inc.
-// All Rights Reserved.
+// Copyright 2010 The Closure Library Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS-IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 /**
  * @fileoverview Definition of goog.messaging.MultiChannel, which uses a
@@ -16,6 +27,8 @@ goog.require('goog.Disposable');
 goog.require('goog.debug.Logger');
 goog.require('goog.events.EventHandler');
 goog.require('goog.messaging.MessageChannel'); // interface
+goog.require('goog.object');
+
 
 
 /**
@@ -69,7 +82,8 @@ goog.messaging.MultiChannel.prototype.logger_ =
  * channel.
  * @param {string} name The name of the virtual channel. Must be unique for this
  *     MultiChannel. Cannot contain colons.
- * @return {goog.messaging.MultiChannel.VirtualChannel} The new virtual channel.
+ * @return {!goog.messaging.MultiChannel.VirtualChannel} The new virtual
+ *     channel.
  */
 goog.messaging.MultiChannel.prototype.createVirtualChannel = function(name) {
   if (name.indexOf(':') != -1) {
@@ -94,7 +108,7 @@ goog.messaging.MultiChannel.prototype.createVirtualChannel = function(name) {
  * unrecognized services to the appropriate virtual channel.
  *
  * @param {string} serviceName The name of the service being called.
- * @param {string|Object} payload The message payload.
+ * @param {string|!Object} payload The message payload.
  * @private
  */
 goog.messaging.MultiChannel.prototype.handleDefault_ = function(
@@ -146,6 +160,7 @@ goog.messaging.MultiChannel.prototype.disposeInternal = function() {
 };
 
 
+
 /**
  * A message channel that proxies its messages over another underlying channel.
  *
@@ -181,7 +196,7 @@ goog.inherits(goog.messaging.MultiChannel.VirtualChannel,
 
 /**
  * The default service to run if no other services match.
- * @type {?function(string, (string|Object))}
+ * @type {?function(string, (string|!Object))}
  * @private
  */
 goog.messaging.MultiChannel.VirtualChannel.prototype.defaultService_;
@@ -263,7 +278,7 @@ goog.messaging.MultiChannel.VirtualChannel.prototype.send =
  * called when this channel is disposed.
  *
  * @param {function()} callback The callback to wrap.
- * @param {*} var_args Other arguments, passed to the callback.
+ * @param {...*} var_args Other arguments, passed to the callback.
  * @private
  */
 goog.messaging.MultiChannel.VirtualChannel.prototype.doCallback_ =

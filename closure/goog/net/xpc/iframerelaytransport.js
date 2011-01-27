@@ -26,6 +26,7 @@ goog.require('goog.net.xpc.Transport');
 goog.require('goog.userAgent');
 
 
+
 /**
  * Iframe relay transport. Creates hidden iframes containing a document
  * from the peer's origin. Data is transferred in the fragment identifier.
@@ -280,7 +281,7 @@ goog.net.xpc.IframeRelayTransport.iframeLoadHandler_ = function() {
  * Disposes of the transport.
  */
 goog.net.xpc.IframeRelayTransport.prototype.disposeInternal = function() {
-  goog.net.xpc.IframeRelayTransport.superClass_.disposeInternal.call(this);
+  goog.base(this, 'disposeInternal');
   if (goog.userAgent.WEBKIT) {
     goog.net.xpc.IframeRelayTransport.cleanup_(0);
   }

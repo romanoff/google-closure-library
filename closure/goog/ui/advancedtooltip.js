@@ -26,6 +26,7 @@ goog.require('goog.ui.Tooltip');
 goog.require('goog.userAgent');
 
 
+
 /**
  * Advanced tooltip widget with cursor tracking abilities. Works like a regular
  * tooltip but can track the cursor position and direction to determine if the
@@ -355,7 +356,8 @@ goog.ui.AdvancedTooltip.prototype.handleTooltipMouseOver = function(event) {
  * @return {number} Hide delay to use.
  */
 goog.ui.AdvancedTooltip.prototype.getHideDelayMs = function() {
-  return this.tracking_ ? this.cursorTrackingHideDelayMs_ : this.hideDelayMs_;
+  return this.tracking_ ? this.cursorTrackingHideDelayMs_ :
+      goog.base(this, 'getHideDelayMs');
 };
 
 

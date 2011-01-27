@@ -3,7 +3,7 @@
 <!--
 Copyright 2008 The Closure Library Authors. All Rights Reserved.
 
-Use of this source code is governed by an Apache 2.0 License.
+Use of this source code is governed by the Apache License, Version 2.0.
 See the COPYING file for details.
 -->
 <!--
@@ -75,12 +75,9 @@ function testConstant() {
 
 function testThrow() {
   var f = goog.functions.error('x');
-  try {
-    f();
-    fail('A function created by goog.functions.error must throw an error');
-  } catch (e) {
-    assertEquals('x', e.message);
-  }
+  var e = assertThrows(
+      'A function created by goog.functions.error must throw an error', f);
+  assertEquals('x', e.message);
 }
 
 function testCompose() {

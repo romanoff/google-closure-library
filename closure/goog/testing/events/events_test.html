@@ -1,7 +1,7 @@
 <!--
 Copyright 2008 The Closure Library Authors. All Rights Reserved.
 
-Use of this source code is governed by an Apache 2.0 License.
+Use of this source code is governed by the Apache License, Version 2.0.
 See the COPYING file for details.
 -->
 <!DOCTYPE html>
@@ -91,19 +91,21 @@ See the COPYING file for details.
     goog.testing.events.fireMouseOverEvent(root, null);
     goog.testing.events.fireMouseOverEvent(root, null, coordinate);
     assertEventTypes(['mouseover', 'mouseover']);
-    assertCoordinates([new goog.math.Coordinate(), coordinate]);
+    assertCoordinates([goog.style.getClientPosition(root), coordinate]);
   }
 
   function testMouseOut() {
     goog.testing.events.fireMouseOutEvent(root, null);
     goog.testing.events.fireMouseOutEvent(root, null, coordinate);
     assertEventTypes(['mouseout', 'mouseout']);
-    assertCoordinates([new goog.math.Coordinate(), coordinate]);
+    assertCoordinates([goog.style.getClientPosition(root), coordinate]);
   }
 
   function testClickSequence() {
     assertTrue(goog.testing.events.fireClickSequence(root));
     assertEventTypes(['mousedown', 'mouseup', 'click']);
+    var rootPosition = goog.style.getClientPosition(root);
+    assertCoordinates([rootPosition, rootPosition, rootPosition]);
   }
 
   function testClickSequenceWithCoordinate() {
@@ -357,7 +359,9 @@ See the COPYING file for details.
   var CONTEXTMENU_SEQ =
       goog.userAgent.WINDOWS ? ['mousedown', 'mouseup', 'contextmenu'] :
       goog.userAgent.GECKO ? ['mousedown', 'contextmenu', 'mouseup'] :
-      ['mousedown', 'contextmenu'];
+      goog.userAgent.WEBKIT && goog.userAgent.MAC ?
+          ['mousedown', 'contextmenu', 'mouseup', 'click'] :
+      ['mousedown', 'contextmenu', 'mouseup'];
 
   function testContextMenuSequence() {
     assertTrue(goog.testing.events.fireContextMenuSequence(root));
@@ -390,6 +394,14 @@ See the COPYING file for details.
     preventDefaultEventType('contextmenu');
     assertFalse(goog.testing.events.fireContextMenuSequence(root));
     assertEventTypes(CONTEXTMENU_SEQ);
+  }
+
+  function testContextMenuSequenceFakeMacWebkit() {
+    stubs.set(goog.userAgent, 'WINDOWS', false);
+    stubs.set(goog.userAgent, 'MAC', true);
+    stubs.set(goog.userAgent, 'WEBKIT', true);
+    assertTrue(goog.testing.events.fireContextMenuSequence(root));
+    assertEventTypes(['mousedown', 'contextmenu', 'mouseup', 'click']);
   }
 
   /**

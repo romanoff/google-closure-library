@@ -3,7 +3,7 @@
 <!--
 Copyright 2006 The Closure Library Authors. All Rights Reserved.
 
-Use of this source code is governed by an Apache 2.0 License.
+Use of this source code is governed by the Apache License, Version 2.0.
 See the COPYING file for details.
 -->
 <!--
@@ -510,9 +510,6 @@ function testRolesAndStates() {
   var someDiv = goog.dom.createDom('div', {id: 'someDiv'}, 'DIV');
   var ac = new goog.ui.AutoComplete(ds, rend, select);
   ac.setTarget(someDiv);
-
-  // disable browser check so this test can run on all browsers
-  goog.dom.a11y.setNoBrowserCheck(true);
 
   // initially activedescendant is not set
   checkActiveDescendant(null);

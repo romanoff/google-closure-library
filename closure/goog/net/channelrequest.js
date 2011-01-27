@@ -23,6 +23,7 @@
  *
  */
 
+
 /**
  * Namespace for BrowserChannel
  */
@@ -35,6 +36,8 @@ goog.require('goog.net.XmlHttp');
 goog.require('goog.net.tmpnetwork');
 goog.require('goog.object');
 goog.require('goog.userAgent');
+
+
 
 /**
  * Creates a ChannelRequest object which encapsulates a request to the server.
@@ -779,12 +782,12 @@ goog.net.ChannelRequest.prototype.tridentGet_ = function(usingSecondaryDomain) {
   this.trident_ = new ActiveXObject('htmlfile');
 
   var hostname = '';
-  var body = '<html>';
+  var body = '<html><body>';
   if (usingSecondaryDomain) {
     hostname = window.location.hostname;
     body += '<script>document.domain="' + hostname + '"</scr' + 'ipt>';
   }
-  body += '</html>';
+  body += '</body></html>';
 
   this.trident_.open();
   this.trident_.write(body);
@@ -796,7 +799,7 @@ goog.net.ChannelRequest.prototype.tridentGet_ = function(usingSecondaryDomain) {
       goog.bind(this.onTridentDone_, this, false);
 
   var div = this.trident_.createElement('div');
-  this.trident_.appendChild(div);
+  this.trident_.parentWindow.document.body.appendChild(div);
   this.requestUri_ = this.baseUri_.clone();
   this.requestUri_.setParameterValue('DOMAIN', hostname);
   this.requestUri_.setParameterValue('t', this.retryId_);
@@ -1043,6 +1046,7 @@ goog.net.ChannelRequest.prototype.getSuccess = function() {
   return this.successful_;
 };
 
+
 /**
  * If the request was not successful, returns the reason.
  *
@@ -1052,6 +1056,7 @@ goog.net.ChannelRequest.prototype.getLastError = function() {
   return this.lastError_;
 };
 
+
 /**
  * Returns the status code of the last request.
  * @return {number} The status code of the last request.
@@ -1059,6 +1064,7 @@ goog.net.ChannelRequest.prototype.getLastError = function() {
 goog.net.ChannelRequest.prototype.getLastStatusCode = function() {
   return this.lastStatusCode_;
 };
+
 
 /**
  * Returns the session id for this channel.
@@ -1068,6 +1074,7 @@ goog.net.ChannelRequest.prototype.getLastStatusCode = function() {
 goog.net.ChannelRequest.prototype.getSessionId = function() {
   return this.sid_;
 };
+
 
 /**
  * Returns the request id for this request. Each request has a unique request

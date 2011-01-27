@@ -44,6 +44,7 @@ goog.require('goog.ui.registry');
 goog.require('goog.userAgent');
 
 
+
 /**
  * Base class for UI controls.  Extends {@link goog.ui.Component} by adding
  * the following:
@@ -1178,7 +1179,7 @@ goog.ui.Control.prototype.handleMouseDown = function(e) {
 
     // For the left button only, activate the control, and focus its key event
     // target (if supported).
-    if (e.isButton(goog.events.BrowserEvent.MouseButton.LEFT)) {
+    if (e.isMouseActionButton()) {
       if (this.isAutoState(goog.ui.Component.State.ACTIVE)) {
         this.setActive(true);
       }
@@ -1189,8 +1190,7 @@ goog.ui.Control.prototype.handleMouseDown = function(e) {
   }
 
   // Cancel the default action unless the control allows text selection.
-  if (!this.isAllowTextSelection() &&
-      e.isButton(goog.events.BrowserEvent.MouseButton.LEFT)) {
+  if (!this.isAllowTextSelection() && e.isMouseActionButton()) {
     e.preventDefault();
   }
 };
