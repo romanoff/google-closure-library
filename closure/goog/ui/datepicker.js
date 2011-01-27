@@ -587,11 +587,9 @@ goog.ui.DatePicker.prototype.setDate = function(date) {
   this.dispatchEvent(selectEvent);
 
   // Fire change event.
-  if (changed) {
-    var changeEvent = new goog.ui.DatePickerEvent(
-        goog.ui.DatePicker.Events.CHANGE, this, this.date_);
-    this.dispatchEvent(changeEvent);
-  }
+  var changeEvent = new goog.ui.DatePickerEvent(
+      goog.ui.DatePicker.Events.CHANGE, this, this.date_);
+  this.dispatchEvent(changeEvent);
 };
 
 
