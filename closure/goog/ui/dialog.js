@@ -974,7 +974,6 @@ goog.ui.Dialog.prototype.resizeBackground_ = function() {
   var scrollSize = {height:0, width:0};
   if (window.innerHeight && window.scrollMaxY) {
       scrollSize.height = window.innerHeight + window.scrollMaxY;
-	  scrollSize.width = window.innerWidth + window.scrollMaxX;
   }
   var w = Math.max(doc.body.scrollWidth, viewSize.width, scrollSize.width);
   var h = Math.max(doc.body.scrollHeight, viewSize.height, scrollSize.height);
