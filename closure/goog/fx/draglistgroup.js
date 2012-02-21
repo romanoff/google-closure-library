@@ -459,6 +459,7 @@ goog.fx.DragListGroup.prototype.handleDragStart_ = function(e) {
   // Instead, our workaround is simply to set the clone's margins to 0px.
   draggerEl.style.margin = '0px';
   draggerEl.style.position = 'absolute';
+  draggerEl.style.display = 'none';
   goog.dom.getOwnerDocument(currDragItem).body.appendChild(draggerEl);
   // Important: goog.style.setPageOffset() only works correctly for IE when the
   // element is already in the document.
@@ -469,6 +470,7 @@ goog.fx.DragListGroup.prototype.handleDragStart_ = function(e) {
   var draggerElSize = goog.style.getSize(draggerEl);
   draggerEl.halfWidth = draggerElSize.width / 2;
   draggerEl.halfHeight = draggerElSize.height / 2;
+  draggerEl.style.display = '';
 
   // Record the bounds of all the drag lists and all the other drag items, in
   // the state where the current drag item is not in any of the lists. (This
