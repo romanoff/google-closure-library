@@ -461,16 +461,17 @@ goog.fx.DragListGroup.prototype.handleDragStart_ = function(e) {
   draggerEl.style.position = 'absolute';
   draggerEl.style.display = 'none';
   goog.dom.getOwnerDocument(currDragItem).body.appendChild(draggerEl);
-  // Important: goog.style.setPageOffset() only works correctly for IE when the
-  // element is already in the document.
-  var currDragItemPos = goog.style.getPageOffset(currDragItem);
-  goog.style.setPageOffset(draggerEl, currDragItemPos);
 
   // Precompute distances from top-left corner to center for efficiency.
   var draggerElSize = goog.style.getSize(draggerEl);
   draggerEl.halfWidth = draggerElSize.width / 2;
   draggerEl.halfHeight = draggerElSize.height / 2;
   draggerEl.style.display = '';
+
+  // Important: goog.style.setPageOffset() only works correctly for IE when the
+  // element is already in the document.
+  var currDragItemPos = goog.style.getPageOffset(currDragItem);
+  goog.style.setPageOffset(draggerEl, currDragItemPos);
 
   // Record the bounds of all the drag lists and all the other drag items, in
   // the state where the current drag item is not in any of the lists. (This
